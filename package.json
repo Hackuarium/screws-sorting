@@ -6,6 +6,10 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
+    "eslint": "eslint . --cache",
+    "eslint-fix": "npm run eslint -- --fix",
+    "prettier": "prettier --check src",
+    "prettier-write": "prettier --write src",
     "preview": "vite preview"
   },
   "dependencies": {
@@ -14,13 +18,19 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-inspector": "^6.0.1",
+    "react-science": "^0.20.1",
     "use-immer": "^0.8.1"
   },
   "devDependencies": {
+    "@types/jest": "^29.4.0",
     "@types/react": "^18.0.27",
     "@types/react-dom": "^18.0.10",
     "@vitejs/plugin-react": "^3.1.0",
+    "eslint": "^8.35.0",
+    "eslint-config-zakodium": "^7.0.0",
+    "prettier": "^2.8.4",
     "typescript": "^4.9.3",
-    "vite": "^4.1.0"
+    "vite": "^4.1.0",
+    "vitest": "^0.29.2"
   }
 }
