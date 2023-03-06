@@ -6,6 +6,7 @@ import { DataContext } from './DataContext';
 import { GlobalContext } from './GlobalContext';
 import LoadImage from './LoadImage';
 import MyTabs from './MyTabs';
+import Test from './WebcamWrapper';
 
 function App() {
   const [globalState, setGlobalState] = useState({
