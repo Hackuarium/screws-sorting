@@ -1,14 +1,14 @@
 import { Tab } from '@headlessui/react';
 import { Fragment } from 'react';
-import { ObjectInspector } from 'react-inspector';
 
 import ImageViewerWrapper from './ImageViewerWrapper';
+import ObjectInspectorWrapper from './components/debug/ObjectInspectorWrapper';
 import ExploreGreyWrapper from './components/explore/ExploreGreyWrapper';
 import ExploreMaskWrapper from './components/explore/ExploreMaskWrapper';
 import ExploreROIsWrapper from './components/explore/ExploreROIsWrapper';
 
 export default function MyTabs() {
-  const tabs = ['Image', 'Grey', 'Mask', 'ROIs'];
+  const tabs = ['Image', 'Grey', 'Mask', 'ROIs', 'Check state'];
 
   return (
     <Tab.Group>
@@ -42,6 +42,9 @@ export default function MyTabs() {
         </Tab.Panel>
         <Tab.Panel>
           <ExploreROIsWrapper />
+        </Tab.Panel>
+        <Tab.Panel>
+          <ObjectInspectorWrapper />
         </Tab.Panel>
       </Tab.Panels>
     </Tab.Group>

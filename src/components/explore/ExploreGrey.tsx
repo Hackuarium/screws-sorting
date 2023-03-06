@@ -6,7 +6,7 @@ export default function ExploreGrey(props: { image: Image }) {
   const { image } = props;
 
   if (!image) {
-    return '<div>No selected image</div>';
+    return <div>No selected image</div>;
   }
 
   if (image.colorModel !== 'RGB' && image.colorModel !== 'RGBA') {

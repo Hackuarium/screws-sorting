@@ -7,7 +7,7 @@ import {
 
 import ImageViewer from '../ImageViewer';
 
-export default function ROIsTable(props) {
+export default function ROIsTable(props: { data: any[] }) {
   const { data = [] } = props;
 
   const columnHelper = createColumnHelper<any>();

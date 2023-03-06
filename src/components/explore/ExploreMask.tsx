@@ -21,6 +21,7 @@ export default function ExploreMask(props: { image: Image }) {
   for (let algorithm in ThresholdAlgorithm) {
     binaryImages.push({
       algorithm,
+      // @ts-expect-error Should be simple to solve
       mask: smallImage.threshold({ algorithm }),
     });
   }

@@ -28,7 +28,6 @@ function App() {
         <div>
           <LoadImage />
           <MyTabs />
-          <ObjectInspector expandLevel={2} data={globalState} />
         </div>
       </DataContext.Provider>
     </GlobalContext.Provider>
