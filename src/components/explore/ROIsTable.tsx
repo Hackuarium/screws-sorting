@@ -4,78 +4,33 @@ import {
   getCoreRowModel,
   useReactTable,
 } from '@tanstack/react-table';
-import React from 'react';
+
+import ImageViewer from '../ImageViewer';
 
 export default function ROIsTable(props) {
-  const { rois } = props;
+  const { data = [] } = props;
 
-  type Person = {
-    firstName: string;
-    lastName: string;
-    age: number;
-    visits: number;
-    status: string;
-    progress: number;
-  };
-
-  const defaultData: Person[] = [
-    {
-      firstName: 'tanner',
-      lastName: 'linsley',
-      age: 24,
-      visits: 100,
-      status: 'In Relationship',
-      progress: 50,
-    },
-    {
-      firstName: 'tandy',
-      lastName: 'miller',
-      age: 40,
-      visits: 40,
-      status: 'Single',
-      progress: 80,
-    },
-    {
-      firstName: 'joe',
-      lastName: 'dirte',
-      age: 45,
-      visits: 20,
-      status: 'Complicated',
-      progress: 10,
-    },
-  ];
-
-  const [data, setData] = React.useState(() => [...defaultData]);
-
-  const columnHelper = createColumnHelper<Person>();
+  const columnHelper = createColumnHelper<any>();
 
   const columns = [
-    columnHelper.accessor('firstName', {
+    columnHelper.accessor('crop', {
+      header: () => 'Crop',
+      cell: (info) => <ImageViewer image={info.getValue()} zoom={0.4} />,
+    }),
+    columnHelper.accessor('width', {
+      header: () => 'Width',
       cell: (info) => info.getValue(),
-      footer: (info) => info.column.id,
     }),
-    columnHelper.accessor((row) => row.lastName, {
-      id: 'lastName',
-      cell: (info) => <i>{info.getValue()}</i>,
-      header: () => <span>Last Name</span>,
-      footer: (info) => info.column.id,
+    columnHelper.accessor('height', {
+      header: () => 'Height',
     }),
-    columnHelper.accessor('age', {
-      header: () => 'Age',
-      cell: (info) => info.renderValue(),
-      footer: (info) => info.column.id,
+    columnHelper.accessor('hull.surface', {
+      header: () => 'Hull surface',
+      cell: (info) => info.getValue().toFixed(0),
     }),
-    columnHelper.accessor('visits', {
-      header: () => <span>Visits</span>,
-      footer: (info) => info.column.id,
-    }),
-    columnHelper.accessor('status', {
-      header: 'Status',
-      footer: (info) => info.column.id,
-    }),
-    columnHelper.accessor('progress', {
-      header: 'Profile Progress',
-      footer: (info) => info.column.id,
+    columnHelper.accessor('mbr.surface', {
+      header: () => 'MBR surface',
+      cell: (info) => info.getValue().toFixed(0),
     }),
   ];
 

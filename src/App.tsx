@@ -30,7 +30,7 @@ function App() {
           <ExploreROIsWrapper />
           <ExploreGreyWrapper />
           <ExploreMaskWrapper />
-          <ROIsTable />
+
           <ObjectInspector expandLevel={2} data={globalState} />
         </div>
       </DataContext.Provider>
