@@ -9,6 +9,8 @@ import ImageViewerWrapper from './ImageViewerWrapper';
 import LoadImage from './LoadImage';
 import ExploreGreyWrapper from './components/explore/ExploreGreyWrapper';
 import ExploreMaskWrapper from './components/explore/ExploreMaskWrapper';
+import ExploreROIsWrapper from './components/explore/ExploreROIsWrapper';
+import ROIsTable from './components/explore/ROIsTable';
 
 function App() {
   const [globalState, setGlobalState] = useState({
@@ -25,8 +27,10 @@ function App() {
         <div>
           <LoadImage />
           <ImageViewerWrapper />
+          <ExploreROIsWrapper />
           <ExploreGreyWrapper />
           <ExploreMaskWrapper />
+          <ROIsTable />
           <ObjectInspector expandLevel={2} data={globalState} />
         </div>
       </DataContext.Provider>

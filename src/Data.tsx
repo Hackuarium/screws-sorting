@@ -1,8 +1,6 @@
 import { decode } from 'image-js';
 import { produce } from 'immer';
 
-import { analyseImage } from './analyseImage';
-
 export const defaultDataValue = {
   value: 'Hello World',
   image: undefined,
@@ -23,7 +21,6 @@ export function getDataActions(globalState, setGlobalState) {
       const arrayBuffer = await response.arrayBuffer();
       // TODO: I would prefer to directly use the arrayBuffer here
       const image = decode(new Uint8Array(arrayBuffer));
-      const analysis = analyseImage(image);
       setGlobalState(
         produce((draft) => {
           draft.data.image = image;

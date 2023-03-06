@@ -19,14 +19,11 @@ export default function ExploreMask(props: { image: Image }) {
 
   const binaryImages: { algorithm: string; mask: Mask }[] = [];
   for (let algorithm in ThresholdAlgorithm) {
-    console.log({ algorithm });
     binaryImages.push({
       algorithm,
       mask: smallImage.threshold({ algorithm }),
     });
   }
-
-  console.log(binaryImages);
 
   // we will calculate all the grey algorithms
   return (
