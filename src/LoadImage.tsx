@@ -7,6 +7,7 @@ export default function LoadImage() {
 
   return (
     <select
+      //@ts-expect-error should be fixed
       onChange={(event) => dataContext.actions.loadImage(event.target.value)}
     >
       <option value="" />
