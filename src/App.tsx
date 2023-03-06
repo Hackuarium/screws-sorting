@@ -7,6 +7,7 @@ import { DataContext } from './DataContext';
 import { GlobalContext } from './GlobalContext';
 import ImageViewerWrapper from './ImageViewerWrapper';
 import LoadImage from './LoadImage';
+import MyTabs from './MyTabs';
 import ExploreGreyWrapper from './components/explore/ExploreGreyWrapper';
 import ExploreMaskWrapper from './components/explore/ExploreMaskWrapper';
 import ExploreROIsWrapper from './components/explore/ExploreROIsWrapper';
@@ -26,11 +27,7 @@ function App() {
       <DataContext.Provider value={{ data: globalState.data, actions }}>
         <div>
           <LoadImage />
-          <ImageViewerWrapper />
-          <ExploreROIsWrapper />
-          <ExploreGreyWrapper />
-          <ExploreMaskWrapper />
-
+          <MyTabs />
           <ObjectInspector expandLevel={2} data={globalState} />
         </div>
       </DataContext.Provider>
