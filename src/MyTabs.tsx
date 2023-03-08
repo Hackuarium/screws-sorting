@@ -7,9 +7,18 @@ import ObjectInspectorWrapper from './components/debug/ObjectInspectorWrapper';
 import ExploreGreyWrapper from './components/explore/ExploreGreyWrapper';
 import ExploreMaskWrapper from './components/explore/ExploreMaskWrapper';
 import ExploreROIsWrapper from './components/explore/ExploreROIsWrapper';
+import DeviceWrapper from './device/DeviceWrapper';
 
 export default function MyTabs() {
-  const tabs = ['Image', 'Grey', 'Mask', 'ROIs', 'Webcam', 'Check state'];
+  const tabs = [
+    'Image',
+    'Grey',
+    'Mask',
+    'ROIs',
+    'Webcam',
+    'Device',
+    'Check state',
+  ];
 
   return (
     <Tab.Group>
@@ -46,6 +55,9 @@ export default function MyTabs() {
         </Tab.Panel>
         <Tab.Panel>
           <WebcamWrapper />
+        </Tab.Panel>
+        <Tab.Panel>
+          <DeviceWrapper />
         </Tab.Panel>
         <Tab.Panel>
           <ObjectInspectorWrapper />

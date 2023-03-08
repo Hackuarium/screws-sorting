@@ -5,6 +5,8 @@ const SCAN_INTERVAL = 1000;
 //@ts-expect-error it exists in the browser on chrome
 const devicesManager = new DevicesManager(navigator.serial);
 
+window.setInterval(() => console.log(devicesManager), 10000);
+
 /**
  * return device information to be stored in DB
  */
@@ -20,7 +22,8 @@ export const localDeviceInfo = ({ id, name }) => {
  * By calling this method from a click you give users the possibility to allow access to some devices
  */
 export const requestDevices = async () => {
-  await devicesManager.requestDevices();
+  const devices = await devicesManager.requestDevices();
+  console.log(devices);
 };
 
 /**

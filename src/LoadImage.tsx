@@ -12,6 +12,7 @@ export default function LoadImage() {
     >
       <option value="" />
       <option value="/test/good.jpg">good.jpg</option>
+      <option value="/test/redDots.jpg">redDots.jpg</option>
       <option value="/test/overlap.jpg">overlap.jpg</option>
     </select>
   );
