@@ -1,5 +1,8 @@
-import { Tab } from '@headlessui/react';
-import { Fragment } from 'react';
+import {
+  CommandLineIcon,
+  EyeIcon,
+  HomeIcon,
+} from '@heroicons/react/24/outline';
 
 import ImageViewerWrapper from './ImageViewerWrapper';
 import WebcamWrapper from './WebcamWrapper';
@@ -7,62 +10,45 @@ import ObjectInspectorWrapper from './components/debug/ObjectInspectorWrapper';
 import ExploreGreyWrapper from './components/explore/ExploreGreyWrapper';
 import ExploreMaskWrapper from './components/explore/ExploreMaskWrapper';
 import ExploreROIsWrapper from './components/explore/ExploreROIsWrapper';
+import { SwitchTabs, SwitchTabsItems } from './components/tailwind-ui';
 import DeviceWrapper from './device/DeviceWrapper';
 
 export default function MyTabs() {
-  const tabs = [
-    'Image',
-    'Grey',
-    'Mask',
-    'ROIs',
-    'Webcam',
-    'Device',
-    'Check state',
+  const tabs: Array<SwitchTabsItems> = [
+    {
+      title: 'Image viewer',
+      content: <ImageViewerWrapper />,
+    },
+
+    {
+      title: 'Explore grey',
+      content: <ExploreGreyWrapper />,
+    },
+    {
+      title: 'Explore mask',
+      content: <ExploreMaskWrapper />,
+    },
+    {
+      title: 'Explore ROIs',
+      content: <ExploreROIsWrapper />,
+    },
+    {
+      title: 'Webcam',
+      content: <WebcamWrapper />,
+    },
+    {
+      title: 'Device',
+      content: <DeviceWrapper />,
+    },
+    {
+      title: 'Object inspector',
+      content: <ObjectInspectorWrapper />,
+    },
   ];
 
   return (
-    <Tab.Group>
-      <Tab.List>
-        {tabs.map((tab) => {
-          return (
-            <Tab as={Fragment}>
-              {({ selected }) => (
-                /* Use the `selected` state to conditionally style the selected tab. */
-                <button
-                  className={
-                    selected ? 'bg-blue-500 text-white' : 'bg-white text-black'
-                  }
-                >
-                  {tab}
-                </button>
-              )}
-            </Tab>
-          );
-        })}
-      </Tab.List>
-      <Tab.Panels>
-        <Tab.Panel>
-          <ImageViewerWrapper />
-        </Tab.Panel>
-        <Tab.Panel>
-          <ExploreGreyWrapper />
-        </Tab.Panel>
-        <Tab.Panel>
-          <ExploreMaskWrapper />
-        </Tab.Panel>
-        <Tab.Panel>
-          <ExploreROIsWrapper />
-        </Tab.Panel>
-        <Tab.Panel>
-          <WebcamWrapper />
-        </Tab.Panel>
-        <Tab.Panel>
-          <DeviceWrapper />
-        </Tab.Panel>
-        <Tab.Panel>
-          <ObjectInspectorWrapper />
-        </Tab.Panel>
-      </Tab.Panels>
-    </Tab.Group>
+    <div className="min-h-screen bg-neutral-200">
+      <SwitchTabs tabs={tabs} align="center" />
+    </div>
   );
 }

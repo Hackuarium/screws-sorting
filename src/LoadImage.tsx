@@ -1,19 +1,32 @@
 import { useContext } from 'react';
 
 import { DataContext } from './DataContext';
+import { Dropdown, Select } from './components/tailwind-ui';
 
 export default function LoadImage() {
   const dataContext = useContext(DataContext);
 
   return (
-    <select
-      //@ts-expect-error should be fixed
-      onChange={(event) => dataContext.actions.loadImage(event.target.value)}
-    >
-      <option value="" />
-      <option value="/test/good.jpg">good.jpg</option>
-      <option value="/test/redDots.jpg">redDots.jpg</option>
-      <option value="/test/overlap.jpg">overlap.jpg</option>
-    </select>
+    <Select
+      size="medium"
+      onSelect={(event) => {
+        dataContext.actions.loadImage(event.value);
+      }}
+      options={[
+        {
+          label: 'good.jpg',
+          value: '/test/good.jpg',
+        },
+        {
+          label: 'redDots.jpg',
+          value: '/test/redDots.jpg',
+        },
+        {
+          label: 'overlap.jpg',
+          value: '/test/overlap.jpg',
+        },
+      ]}
+      placeholder="Select an image..."
+    />
   );
 }
