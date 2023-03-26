@@ -11,8 +11,8 @@ import {
   RHFValidationProps,
 } from '../util';
 
-import { useRHFConfig } from './FormRHF';
 import { InputFieldRHFCustomProps } from './InputFieldRHF';
+import { useRHFConfig } from './context/RHFContext';
 
 export type TextAreaFieldProps = TextAreaProps;
 

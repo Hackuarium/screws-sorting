@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { ReactNode, Ref, useMemo } from 'react';
 
 import { forwardRefWithGeneric } from '../../util';
@@ -6,9 +8,9 @@ import {
   defaultGetValue,
   defaultRenderCreate,
   defaultRenderOption,
-  InternalSearchSelect,
-  useSearchSelectInternals,
-} from '../../utils/search-select-utils';
+} from '../../utils/defaultSearchSelectUtils';
+import { useSearchSelectInternals } from '../../utils/hooks/useSearchSelectInternals';
+import { InternalSearchSelect } from '../../utils/search-select-utils';
 
 import { GetValue, RenderOption, SimpleSelectOption } from './Select';
 

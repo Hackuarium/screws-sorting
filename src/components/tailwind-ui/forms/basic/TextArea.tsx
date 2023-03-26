@@ -1,7 +1,8 @@
 import clsx from 'clsx';
 import { forwardRef, ReactNode, Ref } from 'react';
 
-import { inputColor, inputError, Label, Help, InputCorner } from './common';
+import { Label, Help, InputCorner } from './common';
+import { inputColor, inputError } from './utils.common';
 
 export interface TextAreaProps
   extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {

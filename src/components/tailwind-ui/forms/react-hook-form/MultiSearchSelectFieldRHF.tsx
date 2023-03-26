@@ -45,7 +45,7 @@ export function MultiSearchSelectFieldRHF<OptionType>(
     fieldState: { error },
     formState: { isSubmitted },
   } = useController({
-    name: props.name,
+    name,
   });
 
   const handleSelect = useCallback(

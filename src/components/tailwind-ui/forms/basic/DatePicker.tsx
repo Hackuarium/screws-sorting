@@ -10,7 +10,8 @@ import {
 } from 'react';
 import ReactDatePicker, { ReactDatePickerProps } from 'react-datepicker';
 
-import { Help, inputColor, InputCorner, inputError, Label } from './common';
+import { Help, InputCorner, Label } from './common';
+import { inputColor, inputError } from './utils.common';
 
 if (typeof window !== 'undefined') {
   // @ts-ignore

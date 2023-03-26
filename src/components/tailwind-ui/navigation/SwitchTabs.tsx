@@ -1,4 +1,4 @@
-import { Tab } from '@headlessui/react';
+import * as RadixTabs from '@radix-ui/react-tabs';
 import clsx from 'clsx';
 import { ReactNode } from 'react';
 
@@ -19,7 +19,7 @@ export function SwitchTabs(props: SwitchTabsProps) {
   const { tabs, align = 'left' } = props;
 
   return (
-    <Tab.Group>
+    <RadixTabs.Root defaultValue="0">
       <div
         className={clsx('flex', {
           'justify-start': align === 'left',
@@ -27,60 +27,41 @@ export function SwitchTabs(props: SwitchTabsProps) {
           'justify-center': align === 'center',
         })}
       >
-        <Tab.List
-          className={clsx(
-            'flex flex-row items-center gap-2 rounded-lg bg-neutral-100 p-1',
-          )}
-        >
-          {tabs.map((tab, index) => (
-            <Tab
+        <RadixTabs.List className="flex flex-row items-center gap-2 rounded-lg bg-neutral-100 p-1">
+          {tabs.map(({ title, disabled, icon }, key) => (
+            <RadixTabs.Trigger
               // eslint-disable-next-line react/no-array-index-key
-              key={index}
-              disabled={tab.disabled}
-              className="rounded-md focus:outline-none focus:ring-2"
+              key={key}
+              value={String(key)}
+              disabled={disabled}
+              className="group rounded-md py-1 px-2 text-sm font-semibold focus:ring-2 data-[state=active]:bg-white data-[disabled]:text-neutral-500 data-[state=active]:shadow"
             >
-              {({ selected }) => {
-                return (
-                  <span
-                    className={clsx(
-                      'flex items-center rounded-md py-1 px-2 text-sm font-semibold',
-                      {
-                        'lg:pr-3': tab.icon,
-                        'bg-white shadow': selected,
-                      },
-                    )}
-                  >
-                    <div
-                      className={clsx('flex flex-row items-center gap-1', {
-                        'text-neutral-500': tab.disabled,
-                      })}
-                    >
-                      {tab.icon && (
-                        <span
-                          className={clsx('h-5 w-5', {
-                            'text-primary-500': selected,
-                          })}
-                        >
-                          {tab.icon}
-                        </span>
-                      )}
-                      <span>{tab.title}</span>
-                    </div>
+              <div
+                className={clsx('flex flex-row items-center gap-1', {
+                  'lg:pr-3': icon,
+                })}
+              >
+                {icon && (
+                  <span className="h-5 w-5 group-data-[state=active]:text-primary-500">
+                    {icon}
                   </span>
-                );
-              }}
-            </Tab>
+                )}
+                <span>{title}</span>
+              </div>
+            </RadixTabs.Trigger>
           ))}
-        </Tab.List>
+        </RadixTabs.List>
       </div>
-      <Tab.Panels>
-        {tabs.map((tab, index) => (
+      {tabs.map(({ content }, key) => (
+        <RadixTabs.Content
           // eslint-disable-next-line react/no-array-index-key
-          <Tab.Panel key={index} className="focus:outline-none">
-            {tab.content}
-          </Tab.Panel>
-        ))}
-      </Tab.Panels>
-    </Tab.Group>
+          key={key}
+          value={String(key)}
+          className="focus:outline-none"
+        >
+          {content}
+        </RadixTabs.Content>
+      ))}
+    </RadixTabs.Root>
   );
 }

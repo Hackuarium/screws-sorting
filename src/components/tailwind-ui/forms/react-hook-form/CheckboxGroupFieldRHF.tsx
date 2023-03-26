@@ -53,7 +53,7 @@ export function CheckboxGroupFieldRHF(props: CheckboxGroupFieldRHFProps) {
   } = useController({ name });
 
   const error = Array.isArray(fieldState.error)
-    ? fieldState.error.filter((err) => err)[0]
+    ? fieldState.error.find(Boolean)
     : fieldState.error;
   const value = field.value as string[];
 
@@ -63,7 +63,7 @@ export function CheckboxGroupFieldRHF(props: CheckboxGroupFieldRHFProps) {
       if (checked) {
         newValue = [...value, option];
       } else {
-        const idx = value.findIndex((opt) => opt === option);
+        const idx = value.indexOf(option);
         if (idx !== -1) {
           newValue = value.slice();
           newValue.splice(idx, 1);
@@ -225,7 +225,7 @@ function useCheckboxGroup() {
       parentUnregister(value);
       setValues((values) => {
         values.delete(value);
-        return new Set([...values]);
+        return new Set(values);
       });
     },
     [setValues, parentUnregister],

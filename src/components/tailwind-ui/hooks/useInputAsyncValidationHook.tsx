@@ -59,10 +59,10 @@ export function useInputAsyncValidation(
           });
         }
       })
-      .catch((e) => {
+      .catch((error) => {
         if (shouldComplete) {
           // eslint-disable-next-line no-console
-          console.error(e);
+          console.error(error);
           setLoading(false);
           setResult({
             error: undefined,

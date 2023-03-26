@@ -2,28 +2,21 @@ import clsx from 'clsx';
 
 import { Alert, AlertType } from '../../feedback/Alert';
 
-import { useFormStatus } from './FormRHF';
-
-const graphqlPrefix = 'GraphQL error: ';
+import { useRootFormError } from './hooks/useRootFormError';
 
 export function FormErrorRHF(props: {
   className?: string;
 }): JSX.Element | null {
-  const [status] = useFormStatus();
+  const root = useRootFormError();
 
-  if (!status?.error) {
+  if (!root) {
     return null;
   }
-
-  const message =
-    typeof status.error.message === 'string' && status.error.message !== ''
-      ? status.error.message.replace(graphqlPrefix, '')
-      : 'Unknown error';
 
   return (
     <Alert
       className={clsx(props.className, 'whitespace-pre-wrap')}
-      title={message}
+      title={root.message}
       type={AlertType.ERROR}
     />
   );

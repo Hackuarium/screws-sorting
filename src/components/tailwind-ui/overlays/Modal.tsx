@@ -150,7 +150,10 @@ export function Modal<T extends ElementType>(props: ModalProps<T>) {
         <div className="absolute top-0 right-0 hidden pt-4 pr-4 sm:block">
           <IconButton
             className="rounded-full text-neutral-400 hover:text-neutral-500 focus:outline-none focus:ring-2 focus:ring-neutral-500"
-            onClick={onRequestClose}
+            onClick={(event) => {
+              event.stopPropagation();
+              onRequestClose();
+            }}
             aria-label="Close"
             color="none"
             icon={<XMarkIcon />}
@@ -173,6 +176,7 @@ export function Modal<T extends ElementType>(props: ModalProps<T>) {
     <Portal>
       <dialog
         onClick={(event) => {
+          event.stopPropagation();
           // Since the dialog has no size of itself, this condition is only
           // `true` when we click on the backdrop.
           if (event.target === event.currentTarget && requestCloseOnBackdrop) {
@@ -261,7 +265,7 @@ Modal.Footer = function ModalFooter(props: {
   className?: string;
   align?: 'right' | 'left' | 'center';
 }) {
-  const { align = 'right' } = props;
+  const { children, className, align = 'right' } = props;
   return (
     <div
       className={clsx(
@@ -270,10 +274,10 @@ Modal.Footer = function ModalFooter(props: {
           'sm:justify-end': align === 'right',
           'sm:justify-center': align === 'center',
         },
-        props.className,
+        className,
       )}
     >
-      {props.children}
+      {children}
     </div>
   );
 };

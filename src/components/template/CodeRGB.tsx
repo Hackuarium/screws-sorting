@@ -3,7 +3,7 @@ import { idToCode } from './encodeDecode';
 export default function CodeRGB(props) {
   const { id, x, y, depth = 2 } = props;
 
-  const code = idToCode(id, depth);
+  const code = idToCode(id);
   const colors = depth === 2 ? ['red', 'white'] : ['red', 'green', 'blue'];
   const pixels = [];
 

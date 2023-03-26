@@ -4,8 +4,8 @@ import { Tooltip, TooltipProps } from './Tooltip';
 
 export interface WithTooltipProps {
   tooltip?: ReactNode;
-  tooltipPlacement?: TooltipProps['placement'];
   tooltipDelay?: TooltipProps['delay'];
+  tooltipPlacement?: TooltipProps['placement'];
 }
 
 export function WithTooltip(props: WithTooltipProps & { children: ReactNode }) {
@@ -13,7 +13,7 @@ export function WithTooltip(props: WithTooltipProps & { children: ReactNode }) {
 
   if (tooltip) {
     return (
-      <Tooltip placement={tooltipPlacement} delay={tooltipDelay}>
+      <Tooltip delay={tooltipDelay} placement={tooltipPlacement}>
         <Tooltip.Content>{tooltip}</Tooltip.Content>
         <Tooltip.Target>{children}</Tooltip.Target>
       </Tooltip>

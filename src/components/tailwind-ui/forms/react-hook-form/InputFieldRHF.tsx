@@ -12,7 +12,7 @@ import {
   RHFValidationProps,
 } from '../util';
 
-import { useRHFConfig } from './FormRHF';
+import { useRHFConfig } from './context/RHFContext';
 
 export type InputFieldProps = InputProps;
 

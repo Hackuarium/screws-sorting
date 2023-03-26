@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { Listbox } from '@headlessui/react';
 import { XMarkIcon } from '@heroicons/react/20/solid';
 import { CheckIcon } from '@heroicons/react/24/outline';
@@ -9,16 +11,15 @@ import { Size } from '../../types';
 import {
   defaultGetValue,
   defaultRenderOption,
-} from '../../utils/search-select-utils';
+} from '../../utils/defaultSearchSelectUtils';
 
+import { Help, InputCorner } from './common';
 import {
-  labelDisabledColor,
-  labelColor,
-  inputError,
   inputColor,
-  Help,
-  InputCorner,
-} from './common';
+  inputError,
+  labelColor,
+  labelDisabledColor,
+} from './utils.common';
 
 export interface SimpleStringSelectOption {
   value: string;

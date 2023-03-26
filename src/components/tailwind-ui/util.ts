@@ -35,7 +35,6 @@ export function delve(
 ): unknown {
   key = typeof key === 'string' ? key.split('.') : key;
   for (const k of key) {
-    // @ts-expect-error
     object = object ? object[k] : undefined;
   }
   return object === undefined ? defaultValue : object;

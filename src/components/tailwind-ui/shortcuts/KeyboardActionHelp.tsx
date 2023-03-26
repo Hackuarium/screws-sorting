@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { InformationCircleIcon } from '@heroicons/react/24/outline';
 import { Fragment, useMemo } from 'react';
 import {

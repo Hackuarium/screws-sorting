@@ -20,8 +20,6 @@ export function FormRHFSlideOver<TValues extends FieldValues>(
     <SlideOver<ComponentType<FormRHFProps<TValues>>>
       {...otherProps}
       requestCloseOnClickOutside={requestCloseOnClickOutside}
-      // TODO: Remove when we want to force update to React 18.
-      // @ts-ignore Weird error.
       wrapperComponent={FormRHF}
       wrapperProps={otherProps}
     >

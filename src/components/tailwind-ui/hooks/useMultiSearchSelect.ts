@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react';
 
 import { SimpleSelectOption } from '../forms/basic/Select';
-import { defaultOptionsFilter } from '../utils/search-select-utils';
+import { defaultOptionsFilter } from '../utils/defaultSearchSelectUtils';
 
 import {
   SearchSelectHookConfig,

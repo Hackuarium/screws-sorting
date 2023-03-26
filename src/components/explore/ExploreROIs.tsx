@@ -73,10 +73,10 @@ export default function ExploreROIs(props: { image: Image }) {
 
 function extractTag(datum, mask: Mask) {
   const medians = getMedians(mask);
-  const code = codeToId(medians.join(''), 2);
+  const code = codeToId(medians.join(''));
   const row = code % 13;
   const column = (code / 13) << 0;
-  if (isNaN(row) || isNaN(column)) {
+  if (Number.isNaN(row) || Number.isNaN(column)) {
     return { row: Number.NaN, column: Number.NaN, raw: medians.join('') };
   }
   return { row, column, raw: medians.join(''), code };

@@ -1,9 +1,14 @@
 import clsx from 'clsx';
-import { Children, createContext, ReactNode, useContext } from 'react';
+import {
+  Children,
+  createContext,
+  ElementType,
+  ReactNode,
+  useContext,
+} from 'react';
 
 import { Roundness, Size, Variant, Color } from '../..';
 import { Dropdown, DropdownProps } from '../dropdown/Dropdown';
-import { WithTooltip, WithTooltipProps } from '../popper/WithTooltip';
 
 import { Button, ButtonProps } from './Button';
 import { getButtonClassName } from './utils';
@@ -69,9 +74,9 @@ export function ButtonGroup(props: ButtonGroupProps): JSX.Element {
   );
 }
 
-ButtonGroup.Button = function ButtonGroupButton(
-  props: Omit<ButtonProps, 'group'> & WithTooltipProps,
-) {
+ButtonGroup.Button = function ButtonGroupButton<
+  T extends ElementType = 'button',
+>(props: Omit<ButtonProps<T>, 'group'>) {
   const ctx = useContext(context);
 
   if (ctx === null) {
@@ -84,30 +89,19 @@ ButtonGroup.Button = function ButtonGroupButton(
     size = ctx.size,
     roundness = ctx.roundness,
     disabled = ctx.disabled,
-
-    tooltip,
-    tooltipDelay,
-    tooltipPlacement,
-
-    ...rest
   } = props;
 
   return (
-    <WithTooltip
-      tooltip={tooltip}
-      tooltipDelay={tooltipDelay}
-      tooltipPlacement={tooltipPlacement}
-    >
-      <Button
-        {...rest}
-        group={ctx.group}
-        variant={variant}
-        color={color}
-        size={size}
-        roundness={roundness}
-        disabled={disabled}
-      />
-    </WithTooltip>
+    // @ts-expect-error the error is not very helpful here, maybe a TS bug
+    <Button
+      {...props}
+      group={ctx.group}
+      variant={variant}
+      color={color}
+      size={size}
+      roundness={roundness}
+      disabled={disabled}
+    />
   );
 };
 

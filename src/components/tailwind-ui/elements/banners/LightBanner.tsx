@@ -8,7 +8,7 @@ export interface LightBannerProps {
 }
 
 export function LightBanner(props: LightBannerProps) {
-  const { description, renderButton } = props;
+  const { description, renderButton, onDismiss } = props;
   return (
     <div className="relative bg-primary-700">
       <div className="mx-auto max-w-7xl px-3 py-3 sm:px-6 lg:px-8">
@@ -21,11 +21,11 @@ export function LightBanner(props: LightBannerProps) {
             </span>
           </div>
         </div>
-        {props.onDismiss && (
+        {onDismiss && (
           <div className="absolute inset-y-0 right-0 flex items-start pt-1 pr-1 sm:items-start sm:pt-1 sm:pr-2">
             <button
               type="button"
-              onClick={props.onDismiss}
+              onClick={onDismiss}
               className="flex rounded-md p-2 hover:bg-primary-500 focus:outline-none focus:ring-2 focus:ring-white"
             >
               <span className="sr-only">Dismiss</span>

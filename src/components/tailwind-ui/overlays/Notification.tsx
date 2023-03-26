@@ -17,24 +17,30 @@ export interface NotificationProps
 }
 
 export function Notification(props: NotificationProps) {
-  const { type = Color.neutral } = props;
+  const {
+    icon,
+    title,
+    state,
+    type = Color.neutral,
+    children,
+    className,
+    onDismiss,
+    isTop,
+  } = props;
 
   return (
     <Transition
       appear
-      show={props.state === 'SHOWING'}
+      show={state === 'SHOWING'}
       enter="transition ease-out duration-300"
-      enterFrom={clsx(
-        props.isTop ? '-translate-y-2' : 'translate-y-2',
-        'opacity-0',
-      )}
+      enterFrom={clsx(isTop ? '-translate-y-2' : 'translate-y-2', 'opacity-0')}
       enterTo="translate-y-0 opacity-100"
       leave="transition ease-in duration-200"
       leaveFrom="opacity-100"
       leaveTo="opacity-0"
       className={clsx(
         'pointer-events-auto w-full max-w-sm rounded-lg bg-white shadow-md',
-        props.className,
+        className,
         {
           'shadow-neutral-500/25': type === Color.neutral,
           'shadow-danger-500/25': type === Color.danger,
@@ -58,7 +64,7 @@ export function Notification(props: NotificationProps) {
         <div className="p-4">
           <div className="flex items-start">
             <div className="h-5 w-5 shrink-0 text-xl text-neutral-600">
-              {props.icon}
+              {icon}
             </div>
             <div
               className={clsx(
@@ -73,7 +79,7 @@ export function Notification(props: NotificationProps) {
                 },
               )}
             >
-              {props.title && (
+              {title && (
                 <p
                   className={clsx(
                     'overflow-hidden text-ellipsis text-sm font-semibold',
@@ -87,16 +93,16 @@ export function Notification(props: NotificationProps) {
                     },
                   )}
                 >
-                  {props.title}
+                  {title}
                 </p>
               )}
 
-              {props.children}
+              {children}
             </div>
             <div className="ml-4 flex shrink-0">
               <IconButton
                 className="inline-flex text-neutral-400 transition duration-150 ease-in-out focus:text-neutral-500 focus:outline-none"
-                onClick={props.onDismiss}
+                onClick={onDismiss}
                 icon={<XMarkIcon />}
                 size="5"
                 color="none"

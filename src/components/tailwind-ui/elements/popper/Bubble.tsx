@@ -24,7 +24,14 @@ export interface BubbleProps {
 }
 
 export function Bubble(props: BubbleProps) {
-  const { reference, children, visible, placement, onClickOutside } = props;
+  const {
+    reference,
+    children,
+    visible,
+    placement,
+    onClickOutside,
+    popperClassName,
+  } = props;
 
   const popperRef = useRef<HTMLDivElement>(null);
   useOnClickOutside(popperRef, onClickOutside);
@@ -65,7 +72,7 @@ export function Bubble(props: BubbleProps) {
           return (
             <div
               ref={ref}
-              className={clsx(props.popperClassName, 'z-50')}
+              className={clsx(popperClassName, 'z-50')}
               style={style}
             >
               <div ref={popperRef}>

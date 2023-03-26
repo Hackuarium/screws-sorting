@@ -44,7 +44,7 @@ export function SearchSelectFieldRHF<OptionType>(
     fieldState: { error },
     formState: { isSubmitted },
   } = useController({
-    name: props.name,
+    name,
   });
 
   const handleSelect = useCallback(

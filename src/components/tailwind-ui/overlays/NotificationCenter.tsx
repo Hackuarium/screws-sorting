@@ -1,6 +1,6 @@
 import { v4 as uuid } from '@lukeed/uuid';
 import clsx from 'clsx';
-import { ReactNode, useContext, useMemo, useReducer } from 'react';
+import { ReactNode, useMemo, useReducer } from 'react';
 
 import { Color } from '..';
 
@@ -13,6 +13,7 @@ import {
   ToastNotificationState,
 } from './NotificationContext';
 import { ToastNotification } from './ToastNotification';
+import { useNotificationCenter } from './hooks/useNotificationCenter';
 
 export type {
   AddNotification,
@@ -23,16 +24,6 @@ export type {
   ToastNotificationAction,
   ToastNotificationConfig,
 } from './NotificationContext';
-
-export function useNotificationCenter(): NotificationContext {
-  const context = useContext(notificationContext);
-
-  if (context === null) {
-    throw new Error('Missing notification context');
-  }
-
-  return context;
-}
 
 type TimeoutConfig = Record<Color, number>;
 

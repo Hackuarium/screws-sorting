@@ -1,10 +1,10 @@
 import { useContext } from 'react';
 
-import { DataContext } from './DataContext';
-import { Dropdown, Select } from './components/tailwind-ui';
+import { DataContext, DataContextType } from './DataContext';
+import { Select } from './components/tailwind-ui';
 
 export default function LoadImage() {
-  const dataContext = useContext(DataContext);
+  const dataContext: DataContextType = useContext(DataContext);
 
   return (
     <Select

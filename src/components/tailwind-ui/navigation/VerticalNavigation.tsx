@@ -84,7 +84,7 @@ export function VerticalNavigation<T>(
     startUncollapsed,
   });
 
-  let chosenSize = size ? size : 'small';
+  const chosenSize = size ?? 'small';
   return (
     <div className="mt-5 flex grow flex-col">
       <nav className="flex-1 space-y-1 px-2">
@@ -160,7 +160,7 @@ function NavigationGroup<T>(props: NavigationGroupProps<T>): JSX.Element {
               iconStyles[size],
             )}
           >
-            {props.element.icon}
+            {element.icon}
           </div>
         )}
 

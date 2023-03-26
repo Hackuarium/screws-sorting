@@ -1,6 +1,6 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import clsx from 'clsx';
-import { createContext, ReactNode, useContext, useMemo, useState } from 'react';
+import { ReactNode, useMemo } from 'react';
 import {
   FieldValues,
   FormProvider,
@@ -15,34 +15,7 @@ import type { AnyObjectSchema } from 'yup';
 
 import { EmptyValue, getEmptyValueProp } from '../util';
 
-interface FormStatus<T extends FieldValues = FieldValues> {
-  error: Error;
-  submitValues: T;
-}
-
-interface RHFConfig {
-  emptyValue: EmptyValue;
-}
-
-const configContext = createContext<RHFConfig | null>(null);
-export function useRHFConfig() {
-  const value = useContext(configContext);
-  if (value === null) {
-    throw new Error(
-      'missing RHF config value, make sure to call useRHFConfig in a descendant of FormRHF',
-    );
-  }
-  return value;
-}
-
-type FormStatusContext<T extends FieldValues = FieldValues> =
-  | readonly [
-      FormStatus<T> | null,
-      React.Dispatch<React.SetStateAction<FormStatus<T> | null>>,
-    ]
-  | null;
-
-const formStatusContext = createContext<FormStatusContext>(null);
+import { configContext } from './context/RHFContext';
 
 function multiYupResolver<TValues extends FieldValues>(
   schemas: AnyObjectSchema | AnyObjectSchema[],
@@ -72,6 +45,11 @@ function multiYupResolver<TValues extends FieldValues>(
   return superResolver;
 }
 
+export interface BaseRootFormError {
+  type?: string;
+  message: string;
+}
+
 export type FormRHFProps<TValues extends FieldValues> = Omit<
   UseFormProps<TValues>,
   'resolver' | 'reValidateMode' | 'shouldUnregister'
@@ -79,12 +57,30 @@ export type FormRHFProps<TValues extends FieldValues> = Omit<
   onSubmit: SubmitHandler<TValues>;
   onInvalidSubmit?: SubmitErrorHandler<TValues>;
   children: ReactNode;
-  validationSchema?: AnyObjectSchema | AnyObjectSchema[];
+  // TODO: Revert type to `AnyObjectSchema | AnyObjectSchema[]` when https://github.com/jquense/yup/issues/1849 is fixed.
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  validationSchema?: any;
   noDefaultStyle?: boolean;
   id?: string;
   className?: string;
   emptyValue?: EmptyValue;
+  formatSubmitError?: (error: any) => BaseRootFormError;
 };
+
+const graphqlPrefix = 'GraphQL error: ';
+
+function defaultFormatSubmitError(error: any) {
+  const message =
+    typeof error.message === 'string' && error.message !== ''
+      ? error.message.replace(graphqlPrefix, '')
+      : 'Unknown error';
+  return { type: 'server', message };
+}
+
+export interface RootFormError extends BaseRootFormError {
+  error: any;
+  data: any;
+}
 
 export function FormRHF<TValues extends FieldValues>(
   props: FormRHFProps<TValues>,
@@ -98,6 +94,7 @@ export function FormRHF<TValues extends FieldValues>(
     validationSchema,
     children,
     emptyValue,
+    formatSubmitError = defaultFormatSubmitError,
     ...formHookProps
   } = props;
   const methods = useForm<TValues>({
@@ -112,62 +109,48 @@ export function FormRHF<TValues extends FieldValues>(
       emptyValue: finalEmptyValue,
     };
   }, [finalEmptyValue]);
-  const [status, setStatus] = useState<FormStatus | null>(null);
-  const contextValue = useMemo(() => {
-    return [status, setStatus] as const;
-  }, [status, setStatus]);
 
   return (
     <configContext.Provider value={configValue}>
-      <formStatusContext.Provider value={contextValue}>
-        <FormProvider {...methods}>
-          <form
-            id={id}
-            className={clsx(
-              { 'flex flex-1 flex-col gap-y-4': !noDefaultStyle },
-              className,
-            )}
-            onSubmit={(event) => {
-              event.stopPropagation();
-
-              let submitValues: TValues;
-
-              const submit = methods.handleSubmit((data, event) => {
-                submitValues = data;
-                return onSubmit(data, event);
-              }, onInvalidSubmit);
-
-              submit(event).catch((err) => {
-                if (!(err instanceof Error)) {
+      <FormProvider {...methods}>
+        <form
+          id={id}
+          className={clsx(
+            { 'flex flex-1 flex-col gap-y-4': !noDefaultStyle },
+            className,
+          )}
+          onSubmit={(event) => {
+            // We have to call this before the handleSubmit from react-hook-form
+            // because the library calls us after doing async activity and it is too late to stop the propagation.
+            event.stopPropagation();
+            // eslint-disable-next-line @typescript-eslint/no-floating-promises
+            methods.handleSubmit(async (data, event) => {
+              try {
+                await onSubmit(data, event);
+              } catch (error) {
+                if (!(error instanceof Error)) {
                   // eslint-disable-next-line no-console
                   console.error(
-                    err,
+                    error,
                     'FormRHF submit resulted in a non-error exception',
                   );
                 }
 
-                setStatus({
-                  error: err as Error,
-                  submitValues,
-                });
-                // Make sure RHF counts this submit as unsuccessful
-                throw err;
-              });
-            }}
-            noValidate
-          >
-            {children}
-          </form>
-        </FormProvider>
-      </formStatusContext.Provider>
+                const rootError: RootFormError = {
+                  ...formatSubmitError(error as Error),
+                  error,
+                  data,
+                };
+
+                methods.setError('root', rootError);
+              }
+            }, onInvalidSubmit)(event);
+          }}
+          noValidate
+        >
+          {children}
+        </form>
+      </FormProvider>
     </configContext.Provider>
   );
-}
-
-export function useFormStatus<T extends FieldValues = FieldValues>() {
-  const context = useContext(formStatusContext) as FormStatusContext<T>;
-  if (context === null) {
-    throw new Error('useFormStatus cannot be used outside a Provider');
-  }
-  return context;
 }

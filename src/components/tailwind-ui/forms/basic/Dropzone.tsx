@@ -60,9 +60,7 @@ export const Dropzone = forwardRef<HTMLInputElement, DropzoneProps>(
                 <ArrowUpOnSquareIcon className="mx-auto h-12 w-12 text-neutral-300" />
               )}
               <div className="mt-1 flex w-full flex-1 justify-center text-sm text-neutral-600">
-                {message ? (
-                  message
-                ) : (
+                {message ?? (
                   <p>
                     <span className="font-semibold text-primary-600 hover:text-primary-500">
                       Upload a file
@@ -73,8 +71,8 @@ export const Dropzone = forwardRef<HTMLInputElement, DropzoneProps>(
               </div>
               <div className="mt-1 text-xs">
                 <div className="text-neutral-500">
-                  {props.accept ? list : null}
-                  {props.accept && props.maxSize ? ' ' : null}
+                  {accept ? list : null}
+                  {accept && props.maxSize ? ' ' : null}
                   {props.maxSize
                     ? `(up to ${String(bytesize(props.maxSize))})`
                     : null}

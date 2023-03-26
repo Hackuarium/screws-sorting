@@ -49,7 +49,7 @@ export function Banner<T extends React.ElementType = 'a'>(
             <div className="order-2 shrink-0 sm:order-3 sm:ml-3">
               <button
                 type="button"
-                onClick={props.onDismiss}
+                onClick={onDismiss}
                 className="-mr-1 flex rounded-md p-2 hover:bg-primary-500 focus:outline-none focus:ring-2 focus:ring-white sm:-mr-2"
               >
                 <span className="sr-only">Dismiss</span>

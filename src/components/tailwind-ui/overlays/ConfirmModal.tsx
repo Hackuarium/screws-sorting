@@ -1,4 +1,4 @@
-import { ElementType, ReactNode } from 'react';
+import { ElementType, ReactNode, MouseEvent } from 'react';
 
 import { Button, Color, Variant } from '..';
 
@@ -35,7 +35,10 @@ function defaultRenderConfirm(options: ConfirmModalConfirmOptions) {
     <Button
       variant={Variant.primary}
       color={options.color}
-      onClick={options.onConfirm}
+      onClick={(event: MouseEvent<HTMLButtonElement>) => {
+        event.stopPropagation();
+        options.onConfirm?.();
+      }}
     >
       {options.confirmText}
     </Button>
@@ -44,7 +47,13 @@ function defaultRenderConfirm(options: ConfirmModalConfirmOptions) {
 
 function defaultRenderCancel(options: ConfirmModalCancelOptions) {
   return (
-    <Button variant={Variant.white} onClick={options.onCancel}>
+    <Button
+      variant={Variant.white}
+      onClick={(event: MouseEvent<HTMLButtonElement>) => {
+        event.stopPropagation();
+        options.onCancel?.();
+      }}
+    >
       {options.cancelText}
     </Button>
   );

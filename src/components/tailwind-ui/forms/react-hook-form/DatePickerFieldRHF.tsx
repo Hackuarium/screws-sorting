@@ -37,7 +37,7 @@ export function DatePickerFieldRHF(props: DatePickerFieldRHFProps) {
     fieldState: { error },
     formState: { isSubmitted },
   } = useController({
-    name: props.name,
+    name,
   });
 
   const { value, onBlur, ref } = field;

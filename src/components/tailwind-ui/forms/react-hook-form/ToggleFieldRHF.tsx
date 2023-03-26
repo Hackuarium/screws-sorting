@@ -36,10 +36,10 @@ export function ToggleFieldRHF(props: ToggleFieldRHFProps): JSX.Element {
     formState: { errors, isSubmitted },
   } = useCheckedFormRHFContext();
   const activated = useWatch({
-    name: props.name,
+    name,
   });
 
-  const error = get(errors, props.name);
+  const error = get(errors, name);
 
   const handleToggle = useCallback(
     (value: boolean) => {
@@ -57,7 +57,7 @@ export function ToggleFieldRHF(props: ToggleFieldRHFProps): JSX.Element {
   return (
     <Toggle
       onToggle={handleToggle}
-      {...register(props.name, rhfOptions)}
+      {...register(name, rhfOptions)}
       activated={activated}
       error={serializeError(error)}
       {...otherProps}

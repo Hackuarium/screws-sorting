@@ -6,7 +6,7 @@ import {
   OptionProps,
 } from './internal/GroupOption';
 
-export type { OptionProps };
+export type { OptionProps } from './internal/GroupOption';
 
 export interface GroupOptionProps {
   label?: string;

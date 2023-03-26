@@ -95,13 +95,17 @@ export function Badge(props: BadgeProps) {
     rounded = false,
     dot = false,
     onDismiss,
+    variant,
+    label,
+    className,
+    style,
   } = props;
 
   const padding = paddings[size];
 
   const coloredDot = 'bg-white border border-neutral-300';
   const color =
-    'color' in props && props.variant === BadgeVariant.COLORED_BACKGROUND
+    'color' in props && variant === BadgeVariant.COLORED_BACKGROUND
       ? colors[props.color]
       : coloredDot;
 
@@ -117,27 +121,25 @@ export function Badge(props: BadgeProps) {
             : 'rounded'
           : 'rounded-full',
         onDismiss ? padding.remove : rounded ? padding.rounded : padding.basic,
-        props.className,
+        className,
       )}
-      style={props.style}
+      style={style}
     >
-      {(props.variant === BadgeVariant.COLORED_DOT || dot) && (
+      {(variant === BadgeVariant.COLORED_DOT || dot) && (
         <svg
           className={clsx(
             'mr-1.5 h-2 w-2',
             size === BadgeSize.LARGE ? '-ml-1' : '-ml-0.5',
             {
               [dotColors['color' in props ? props.color : Color.neutral]]:
-                props.variant === BadgeVariant.COLORED_BACKGROUND &&
-                'color' in props,
+                variant === BadgeVariant.COLORED_BACKGROUND && 'color' in props,
             },
           )}
           fill="currentColor"
           viewBox="0 0 8 8"
           style={{
             color:
-              props.variant === BadgeVariant.COLORED_DOT &&
-              'customColor' in props
+              variant === BadgeVariant.COLORED_DOT && 'customColor' in props
                 ? props.customColor
                 : undefined,
           }}
@@ -145,11 +147,11 @@ export function Badge(props: BadgeProps) {
           <circle cx="4" cy="4" r="3" />
         </svg>
       )}
-      {props.label}
+      {label}
       {onDismiss && (
         <button
           type="button"
-          onClick={props.onDismiss}
+          onClick={onDismiss}
           className={clsx(
             'ml-0.5 inline-flex h-4 w-4 shrink-0 items-center justify-center rounded-full focus:text-white focus:outline-none',
             removeColors['color' in props ? props.color : Color.neutral],

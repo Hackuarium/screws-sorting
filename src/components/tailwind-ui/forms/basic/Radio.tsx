@@ -1,7 +1,8 @@
 import clsx from 'clsx';
 import { forwardRef, Ref } from 'react';
 
-import { Help, labelColor, labelDisabledColor } from './common';
+import { Help } from './common';
+import { labelColor, labelDisabledColor } from './utils.common';
 
 export interface RadioProps
   extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'type'> {

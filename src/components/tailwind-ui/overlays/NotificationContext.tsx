@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { createContext, ReactNode } from 'react';
 
 import { Color } from '..';

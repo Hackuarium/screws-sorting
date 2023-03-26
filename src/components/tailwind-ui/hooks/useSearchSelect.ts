@@ -1,12 +1,10 @@
 import { useMemo, useState } from 'react';
 
 import { SimpleSelectOption } from '../forms/basic/Select';
-import {
-  OptionsFilter,
-  defaultOptionsFilter,
-} from '../utils/search-select-utils';
+import { defaultOptionsFilter } from '../utils/defaultSearchSelectUtils';
+import { OptionsFilter } from '../utils/search-select-utils';
 
-export type { OptionsFilter };
+export type { OptionsFilter } from '../utils/search-select-utils';
 
 export interface SearchSelectHookResult<OptionType> {
   searchValue: string;

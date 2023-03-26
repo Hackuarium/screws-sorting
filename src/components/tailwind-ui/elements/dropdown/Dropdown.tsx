@@ -34,7 +34,7 @@ export interface DropdownProps<T> {
    */
   noDefaultButtonStyle?: boolean;
   className?: string;
-  title?: string;
+  title?: ReactNode;
   options: DropdownElement<T>[][];
   onSelect: (selected: DropdownOption<T>) => void;
   placement?: Placement;
@@ -68,13 +68,7 @@ export function Dropdown<T>(props: DropdownProps<T>): React.ReactElement {
   return (
     <Menu>
       {(menu) => (
-        <div
-          className={clsx(
-            'text-left',
-            { relative: menu.open },
-            className || 'inline-block',
-          )}
-        >
+        <div className={clsx('text-left', className || 'inline-block')}>
           <Menu.Button
             ref={setTargetRef}
             disabled={disabled}
@@ -143,7 +137,10 @@ export function Dropdown<T>(props: DropdownProps<T>): React.ReactElement {
                               >
                                 {({ active }) => (
                                   <div
-                                    onClick={() => onSelect(option)}
+                                    onClick={(event) => {
+                                      event.stopPropagation();
+                                      onSelect(option);
+                                    }}
                                     className={clsx(
                                       'focus:outline-none',
                                       option.disabled

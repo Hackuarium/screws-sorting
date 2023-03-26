@@ -43,7 +43,7 @@ export function SelectFieldRHF<OptionType>(
     fieldState: { error },
     formState: { isSubmitted },
   } = useController({
-    name: props.name,
+    name,
   });
 
   return (

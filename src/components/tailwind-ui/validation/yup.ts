@@ -1,33 +1,28 @@
-import { object, date, string, number } from 'yup';
-import type { ObjectShape } from 'yup/lib/object';
+import { object, date, string, number, ObjectShape } from 'yup';
 
 const requiredMessage = 'This field is required.';
 
 export function requiredString(message?: string) {
   return string()
-    .required(message || requiredMessage)
-    .nullable();
+    .typeError(message || requiredMessage)
+    .required(message || requiredMessage);
 }
 
 export function requiredNumber(message?: string) {
   return number()
-    .required(message || requiredMessage)
-    .nullable();
+    .typeError(message || 'This field is required and must be a number.')
+    .required(message || requiredMessage);
 }
 
 export function requiredObject<T extends ObjectShape>(
   spec?: T,
   message?: string,
 ) {
-  return object(spec)
-    .required(message || requiredMessage)
-    .nullable();
+  return object(spec).required(message || requiredMessage);
 }
 
 export function requiredDate(message?: string) {
-  return date()
-    .required(message || requiredMessage)
-    .nullable();
+  return date().required(message || requiredMessage);
 }
 
 export function optionalString() {

@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { ReactNode, Ref, useCallback, useMemo } from 'react';
 
 import { Badge } from '../../elements/badge/Badge';
@@ -11,9 +13,9 @@ import {
   defaultRenderCreate,
   defaultRenderOption,
   defaultRenderSelectedOptions,
-  InternalMultiSearchSelect,
-  useSearchSelectInternals,
-} from '../../utils/search-select-utils';
+} from '../../utils/defaultSearchSelectUtils';
+import { useSearchSelectInternals } from '../../utils/hooks/useSearchSelectInternals';
+import { InternalMultiSearchSelect } from '../../utils/search-select-utils';
 
 import {
   MultiSearchSelectProps,

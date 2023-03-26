@@ -7,7 +7,8 @@ import {
   useRef,
 } from 'react';
 
-import { Help, labelColor, labelDisabledColor } from './common';
+import { Help } from './common';
+import { labelColor, labelDisabledColor } from './utils.common';
 
 export interface CheckboxProps
   extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'type'> {

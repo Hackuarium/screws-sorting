@@ -18,7 +18,7 @@ export function SimpleListContainer(
 }
 
 export function CardListContainer(props: ListContainerProps) {
-  const { mobileEdgeToEdge } = props;
+  const { mobileEdgeToEdge, children } = props;
 
   return (
     <div
@@ -27,13 +27,13 @@ export function CardListContainer(props: ListContainerProps) {
         mobileEdgeToEdge ? 'sm:rounded-md' : 'rounded-md',
       )}
     >
-      <ul className="divide-y divide-neutral-200">{props.children}</ul>
+      <ul className="divide-y divide-neutral-200">{children}</ul>
     </div>
   );
 }
 
 export function FlatCardListContainer(props: ListContainerProps) {
-  const { mobileEdgeToEdge } = props;
+  const { mobileEdgeToEdge, children } = props;
 
   return (
     <div
@@ -42,7 +42,7 @@ export function FlatCardListContainer(props: ListContainerProps) {
         mobileEdgeToEdge ? 'sm:rounded-md' : 'rounded-md',
       )}
     >
-      <ul className="divide-y divide-neutral-300">{props.children}</ul>
+      <ul className="divide-y divide-neutral-300">{children}</ul>
     </div>
   );
 }

@@ -4,15 +4,13 @@ import { forwardRef, ReactNode, Ref } from 'react';
 import { Spinner } from '../../elements/spinner/Spinner';
 
 import {
-  inputColor,
-  inputError,
-  inputValid,
   Label,
   Help,
   InputCorner,
   InputErrorIcon,
   InputValidIcon,
 } from './common';
+import { inputColor, inputError, inputValid } from './utils.common';
 
 export interface CustomInputProps {
   error?: string;
