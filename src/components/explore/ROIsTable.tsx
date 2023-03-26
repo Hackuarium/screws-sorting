@@ -12,11 +12,15 @@ export default function ROIsTable(props: { data: Roi[] }) {
   const { data = [] } = props;
 
   const columnHelper = createColumnHelper<any>();
-
+  console.log(data.filter((datum) => datum.id === -128));
   const columns = [
     columnHelper.accessor('crop', {
       header: () => 'Crop',
       cell: (info) => <ImageViewer image={info.getValue()} zoom={0.4} />,
+    }),
+    columnHelper.accessor('id', {
+      header: () => 'ID',
+      cell: (info) => info.getValue(),
     }),
     columnHelper.accessor('origin.column', {
       header: () => 'Column',
@@ -34,7 +38,16 @@ export default function ROIsTable(props: { data: Roi[] }) {
       header: () => 'Height',
     }),
     columnHelper.accessor('feret.aspectRatio', {
-      header: () => 'Aspect Ratio (ferret)',
+      header: () => 'Aspect Ratio (feret)',
+      cell: (info) => info.getValue().toFixed(2),
+    }),
+
+    columnHelper.accessor('feret.minDiameter.length', {
+      header: () => 'Feret minDiameter',
+      cell: (info) => info.getValue().toFixed(2),
+    }),
+    columnHelper.accessor('feret.maxDiameter.length', {
+      header: () => 'Feret maxDiameter',
       cell: (info) => info.getValue().toFixed(2),
     }),
     columnHelper.accessor('roundness', {

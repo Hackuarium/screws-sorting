@@ -47,6 +47,7 @@
     "react-hook-form": "^7.43.8",
     "react-inspector": "^6.0.1",
     "react-kbs": "^2.1.1",
+    "react-plot": "^1.4.2",
     "react-popper": "^2.3.0",
     "react-science": "^0.21.2",
     "react-table": "^7.8.0",
