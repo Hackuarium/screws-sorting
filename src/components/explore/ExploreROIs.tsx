@@ -24,7 +24,12 @@ export default function ExploreROIs(props: { image: Image }) {
     image = image.grey({ algorithm: 'blue' }); // max or blue
   }
 
-  const mask = threshold(image, { algorithm: ThresholdAlgorithm.MINIMUM });
+  const mask = threshold(image, {
+    algorithm: ThresholdAlgorithm.MINIMUM,
+  })
+    .invert()
+    .clearBorder({})
+    .invert();
 
   const roiMapManager = fromMask(mask);
 
