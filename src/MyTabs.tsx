@@ -1,9 +1,3 @@
-import {
-  CommandLineIcon,
-  EyeIcon,
-  HomeIcon,
-} from '@heroicons/react/24/outline';
-
 import ImageViewerWrapper from './ImageViewerWrapper';
 import WebcamWrapper from './WebcamWrapper';
 import ObjectInspectorWrapper from './components/debug/ObjectInspectorWrapper';
@@ -11,6 +5,7 @@ import ExploreGreyWrapper from './components/explore/ExploreGreyWrapper';
 import ExploreMaskWrapper from './components/explore/ExploreMaskWrapper';
 import ExploreROIsWrapper from './components/explore/ExploreROIsWrapper';
 import { SwitchTabs, SwitchTabsItems } from './components/tailwind-ui';
+import Template from './components/template/Template';
 import DeviceWrapper from './device/DeviceWrapper';
 
 export default function MyTabs() {
@@ -39,6 +34,10 @@ export default function MyTabs() {
     {
       title: 'Device',
       content: <DeviceWrapper />,
+    },
+    {
+      title: 'Template',
+      content: <Template />,
     },
     {
       title: 'Object inspector',

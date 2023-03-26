@@ -4,10 +4,11 @@ import {
   getCoreRowModel,
   useReactTable,
 } from '@tanstack/react-table';
+import { Roi } from 'image-js';
 
 import ImageViewer from '../ImageViewer';
 
-export default function ROIsTable(props: { data: any[] }) {
+export default function ROIsTable(props: { data: Roi[] }) {
   const { data = [] } = props;
 
   const columnHelper = createColumnHelper<any>();
@@ -17,6 +18,14 @@ export default function ROIsTable(props: { data: any[] }) {
       header: () => 'Crop',
       cell: (info) => <ImageViewer image={info.getValue()} zoom={0.4} />,
     }),
+    columnHelper.accessor('origin.column', {
+      header: () => 'Column',
+      cell: (info) => info.getValue(),
+    }),
+    columnHelper.accessor('origin.row', {
+      header: () => 'Row',
+      cell: (info) => info.getValue(),
+    }),
     columnHelper.accessor('width', {
       header: () => 'Width',
       cell: (info) => info.getValue(),
@@ -24,13 +33,37 @@ export default function ROIsTable(props: { data: any[] }) {
     columnHelper.accessor('height', {
       header: () => 'Height',
     }),
-    columnHelper.accessor('hull.surface', {
-      header: () => 'Hull surface',
-      cell: (info) => info.getValue().toFixed(0),
+    columnHelper.accessor('feret.aspectRatio', {
+      header: () => 'Aspect Ratio (ferret)',
+      cell: (info) => info.getValue().toFixed(2),
     }),
-    columnHelper.accessor('mbr.surface', {
-      header: () => 'MBR surface',
-      cell: (info) => info.getValue().toFixed(0),
+    columnHelper.accessor('roundness', {
+      header: () => 'Roundness',
+      cell: (info) => info.getValue().toFixed(2),
+    }),
+    columnHelper.accessor('solidity', {
+      header: () => 'Solidity',
+      cell: (info) => info.getValue().toFixed(2),
+    }),
+    columnHelper.accessor('sphericity', {
+      header: () => 'Sphericity',
+      cell: (info) => info.getValue().toFixed(2),
+    }),
+    columnHelper.accessor('fillRatio', {
+      header: () => 'Fill ratio',
+      cell: (info) => info.getValue().toFixed(2),
+    }),
+    columnHelper.accessor('tag.column', {
+      header: () => 'Tag column',
+      cell: (info) => info?.getValue(),
+    }),
+    columnHelper.accessor('tag.row', {
+      header: () => 'Tag row',
+      cell: (info) => info?.getValue(),
+    }),
+    columnHelper.accessor('tag.raw', {
+      header: () => 'Tag row',
+      cell: (info) => info?.getValue(),
     }),
   ];
 

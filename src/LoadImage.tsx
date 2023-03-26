@@ -25,6 +25,22 @@ export default function LoadImage() {
           label: 'overlap.jpg',
           value: '/test/overlap.jpg',
         },
+        {
+          label: 'colorTags.jpg',
+          value: '/test/colorTags.jpg',
+        },
+        {
+          label: 'screwTags.jpg',
+          value: '/test/screwTags.jpg',
+        },
+        {
+          label: 'bwTags.jpg',
+          value: '/test/bwTags.jpg',
+        },
+        {
+          label: 'bwTags2.jpg',
+          value: '/test/bwTags2.jpg',
+        },
       ]}
       placeholder="Select an image..."
     />
