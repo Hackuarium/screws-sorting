@@ -41,6 +41,10 @@ export default function LoadImage() {
           label: 'bwTags2.jpg',
           value: '/test/bwTags2.jpg',
         },
+        {
+          label: 'optimal.jpg',
+          value: '/test/optimal.jpg',
+        },
       ]}
       placeholder="Select an image..."
     />

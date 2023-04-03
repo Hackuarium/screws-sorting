@@ -3,7 +3,7 @@ import WebcamWrapper from './WebcamWrapper';
 import ObjectInspectorWrapper from './components/debug/ObjectInspectorWrapper';
 import ExploreGreyWrapper from './components/explore/ExploreGreyWrapper';
 import ExploreMaskWrapper from './components/explore/ExploreMaskWrapper';
-import ExploreROIsWrapper from './components/explore/ExploreROIsWrapper';
+import ExploreROIsWrapper from './components/rois/ExploreROIsWrapper';
 import { SwitchTabs, SwitchTabsItems } from './components/tailwind-ui';
 import Template from './components/template/Template';
 import DeviceWrapper from './device/DeviceWrapper';

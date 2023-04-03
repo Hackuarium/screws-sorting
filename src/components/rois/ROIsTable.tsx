@@ -12,7 +12,6 @@ export default function ROIsTable(props: { data: Roi[] }) {
   const { data = [] } = props;
 
   const columnHelper = createColumnHelper<any>();
-  console.log(data.filter((datum) => datum.id === -128));
   const columns = [
     columnHelper.accessor('crop', {
       header: () => 'Crop',
