@@ -18,10 +18,6 @@ export default function LoadImage() {
           value: '/test/good.jpg',
         },
         {
-          label: 'redDots.jpg',
-          value: '/test/redDots.jpg',
-        },
-        {
           label: 'overlap.jpg',
           value: '/test/overlap.jpg',
         },
@@ -30,20 +26,24 @@ export default function LoadImage() {
           value: '/test/colorTags.jpg',
         },
         {
-          label: 'screwTags.jpg',
-          value: '/test/screwTags.jpg',
-        },
-        {
-          label: 'bwTags.jpg',
-          value: '/test/bwTags.jpg',
-        },
-        {
-          label: 'bwTags2.jpg',
-          value: '/test/bwTags2.jpg',
-        },
-        {
           label: 'optimal.jpg',
           value: '/test/optimal.jpg',
+        },
+        {
+          label: 'real1.jpg',
+          value: '/test/real1.jpg',
+        },
+        {
+          label: 'real2.jpg',
+          value: '/test/real2.jpg',
+        },
+        {
+          label: 'real3.jpg',
+          value: '/test/real3.jpg',
+        },
+        {
+          label: 'real4.jpg',
+          value: '/test/real4.jpg',
         },
       ]}
       placeholder="Select an image..."
