@@ -14,6 +14,4 @@ export function mapTags(data) {
     }
     return a.tag.row - b.tag.row;
   });
-
-  console.log(data);
 }

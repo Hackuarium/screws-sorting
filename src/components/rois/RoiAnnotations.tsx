@@ -1,11 +1,13 @@
 import { Roi } from 'image-js';
 
 export default function RoiAnnotations(props) {
-  const { width = 0, height = 0, rois } = props;
+  const { width = 0, height = 0, rois, roiOptions } = props;
   if (!rois) return;
   const annotations = [];
   for (const roi of rois) {
-    annotations.push(<RoiAnnotation key={roi.id} roi={roi} />);
+    annotations.push(
+      <RoiAnnotation key={roi.id} roi={roi} roiOptions={roiOptions} />,
+    );
   }
   const svg = (
     <div
@@ -32,22 +34,22 @@ export default function RoiAnnotations(props) {
 }
 
 function RoiAnnotation(props) {
-  const { roi } = props;
+  const { roi, roiOptions } = props;
   const x = roi.origin.column;
   const y = roi.origin.row;
   return (
     <g transform={`translate(${x} ${y})`}>
-      <Box roi={roi} />
-      <Feret roi={roi} />
-      <Mbr roi={roi} />
-      <ConvexHull roi={roi} />
+      <Box roi={roi} roiOptions={roiOptions} />
+      <Feret roi={roi} roiOptions={roiOptions} />
+      <Mbr roi={roi} roiOptions={roiOptions} />
+      <ConvexHull roi={roi} roiOptions={roiOptions} />
     </g>
   );
 }
 
-function Box(props: { roi: Roi }) {
-  const { roi } = props;
-  const label = roi.surface;
+function Box(props: { roi: Roi; roiOptions?: any }) {
+  const { roi, roiOptions = {} } = props;
+  const { label = (roi) => roi.surface } = roiOptions;
   return (
     <>
       <rect
@@ -66,13 +68,13 @@ function Box(props: { roi: Roi }) {
         fontSize="24"
         fill="black"
       >
-        {label}
+        {label(roi)}
       </text>
     </>
   );
 }
 
-function Feret(props: { roi: Roi }) {
+function Feret(props: { roi: Roi; roiOptions?: any }) {
   const { roi } = props;
   return (
     <>
@@ -94,7 +96,7 @@ function Feret(props: { roi: Roi }) {
   );
 }
 
-function Mbr(props: { roi: Roi }) {
+function Mbr(props: { roi: Roi; roiOptions?: any }) {
   const { roi } = props;
   const polygon = roi.mbr.corners
     .map((corner) => `${corner.column},${corner.row}`)
@@ -107,7 +109,7 @@ function Mbr(props: { roi: Roi }) {
   );
 }
 
-function ConvexHull(props: { roi: Roi }) {
+function ConvexHull(props: { roi: Roi; roiOptions?: any }) {
   const { roi } = props;
   const polygon = roi.convexHull.points
     .map((corner) => `${corner.column},${corner.row}`)

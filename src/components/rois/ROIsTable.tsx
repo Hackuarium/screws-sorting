@@ -65,18 +65,6 @@ export default function ROIsTable(props: { data: Roi[] }) {
       header: () => 'Fill ratio',
       cell: (info) => info.getValue().toFixed(2),
     }),
-    columnHelper.accessor('tag.column', {
-      header: () => 'Tag column',
-      cell: (info) => info?.getValue(),
-    }),
-    columnHelper.accessor('tag.row', {
-      header: () => 'Tag row',
-      cell: (info) => info?.getValue(),
-    }),
-    columnHelper.accessor('tag.raw', {
-      header: () => 'Tag row',
-      cell: (info) => info?.getValue(),
-    }),
   ];
 
   const table = useReactTable({
