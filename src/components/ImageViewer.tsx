@@ -1,15 +1,15 @@
 import { Image, Roi, writeCanvas } from 'image-js';
 import { useEffect, useRef } from 'react';
+import { MapInteractionCSS } from 'react-map-interaction';
 
 import RoiAnnotations from './rois/RoiAnnotations';
 
 export default function ImageViewer(props: {
   image: Image;
-  zoom?: number;
   rois?: Roi[];
   roiOptions?: any;
 }) {
-  const { image, zoom = 0.1, rois, roiOptions } = props;
+  const { image, rois, roiOptions } = props;
   const imageRef = useRef(null);
 
   useEffect(() => {
@@ -18,15 +18,17 @@ export default function ImageViewer(props: {
   }, [imageRef, image]);
 
   return (
-    <div style={{ zoom, position: 'relative' }}>
-      <canvas ref={imageRef} />
+    <MapInteractionCSS>
+      <div style={{ position: 'relative' }}>
+        <canvas ref={imageRef} />
 
-      <RoiAnnotations
-        width={image?.width}
-        height={image?.height}
-        rois={rois}
-        roiOptions={roiOptions}
-      />
-    </div>
+        <RoiAnnotations
+          width={image?.width}
+          height={image?.height}
+          rois={rois}
+          roiOptions={roiOptions}
+        />
+      </div>
+    </MapInteractionCSS>
   );
 }
