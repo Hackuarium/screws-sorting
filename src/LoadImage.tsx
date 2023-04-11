@@ -7,7 +7,7 @@ export default function LoadImage() {
   const dataContext: DataContextType = useContext(DataContext);
 
   const [imageURL, setImageURL] = useState(
-    localStorage.getItem('imageURL') || '',
+    localStorage.getItem('imageURL') || 'https://picsum.photos/1600/2400',
   );
 
   return (
