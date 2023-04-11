@@ -15,7 +15,7 @@ export default function ROIsTable(props: { data: Roi[] }) {
   const columns = [
     columnHelper.accessor('crop', {
       header: () => 'Crop',
-      cell: (info) => <ImageViewer image={info.getValue()} zoom={0.4} />,
+      cell: (info) => <ImageViewer image={info.getValue()} />,
     }),
     columnHelper.accessor('id', {
       header: () => 'ID',

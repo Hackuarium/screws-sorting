@@ -74,7 +74,6 @@ export default function ExploreROIs(props: { image: Image }) {
       <textarea cols={100} rows={10} readOnly value={gcode} />
       <ImageViewer
         image={painted}
-        zoom={0.5}
         rois={rois}
         roiOptions={{
           label: (roi) => {

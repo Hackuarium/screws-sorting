@@ -46,7 +46,7 @@ export default function ExploreGrey(props: { image: Image }) {
       {greyImages.map((data) => (
         <div key={data.algorithm}>
           <div>{data.algorithm}</div>
-          <ImageViewer image={data.image} zoom={1} />
+          <ImageViewer image={data.image} />
         </div>
       ))}
     </div>
