@@ -15,13 +15,10 @@ export default function ExploreMask(props: { image: Image }) {
 
   const smallImage = image.resize({ width: 400 });
 
-  // todo should be exposed by image-js
-
-  const binaryImages: { algorithm: string; mask: Mask }[] = [];
-  for (let algorithm in ThresholdAlgorithm) {
+  const binaryImages: { algorithm: ThresholdAlgorithm; mask: Mask }[] = [];
+  for (let algorithm of Object.values(ThresholdAlgorithm)) {
     binaryImages.push({
       algorithm,
-      // @ts-expect-error Should be simple to solve
       mask: smallImage.threshold({ algorithm }),
     });
   }

@@ -1,4 +1,4 @@
-import { Image, GreyAlgorithms } from 'image-js';
+import { Image, GreyAlgorithm } from 'image-js';
 
 import ImageViewer from '../ImageViewer';
 
@@ -17,25 +17,9 @@ export default function ExploreGrey(props: { image: Image }) {
 
   // todo should be exposed by image-js
 
-  const algorithms: GreyAlgorithms[] = [
-    'luma709',
-    'luma601',
-    'max',
-    'min',
-    'average',
-    'minmax',
-    'red',
-    'green',
-    'blue',
-    'black',
-    'cyan',
-    'magenta',
-    'yellow',
-    'hue',
-    'saturation',
-    'lightness',
-  ];
-  const greyImages: { algorithm: GreyAlgorithms; image: Image }[] = [];
+  const algorithms = Object.values(GreyAlgorithm);
+
+  const greyImages: { algorithm: GreyAlgorithm; image: Image }[] = [];
   for (let algorithm of algorithms) {
     greyImages.push({ algorithm, image: smallImage.grey({ algorithm }) });
   }
