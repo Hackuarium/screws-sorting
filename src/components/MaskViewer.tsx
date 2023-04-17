@@ -1,7 +1,7 @@
-import { Image, ImageColorModel, Mask, writeCanvas } from 'image-js';
+import { ImageColorModel, Mask, writeCanvas } from 'image-js';
 import { useEffect, useRef } from 'react';
 
-export default function ImageViewer(props: { mask: Mask; zoom?: number }) {
+export default function MaskViewer(props: { mask: Mask; zoom?: number }) {
   const { mask, zoom = 0.1 } = props;
   const imageRef = useRef(null);
 

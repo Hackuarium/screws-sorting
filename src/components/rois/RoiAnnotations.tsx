@@ -15,8 +15,8 @@ export default function RoiAnnotations(props) {
         position: 'absolute',
         left: 0,
         top: 0,
-        width: `${width}px`,
-        height: `${height}px`,
+        width,
+        height,
       }}
     >
       <svg
@@ -98,7 +98,7 @@ function Feret(props: { roi: Roi; roiOptions?: any }) {
 
 function Mbr(props: { roi: Roi; roiOptions?: any }) {
   const { roi } = props;
-  const polygon = roi.mbr.corners
+  const polygon = roi.mbr.points
     .map((corner) => `${corner.column},${corner.row}`)
     .join(' ');
   return (

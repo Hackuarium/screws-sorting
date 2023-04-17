@@ -10,6 +10,7 @@ import {
 } from 'image-js';
 
 import ImageViewer from '../ImageViewer';
+import MaskViewer from '../MaskViewer';
 
 import ROIsTable from './ROIsTable';
 import { pickAndSortGCode, raiseAndDropGCode } from './gcode';
@@ -27,10 +28,10 @@ export default function ExploreROIs(props: { image: Image }) {
 
   const mask = threshold(image, {
     algorithm: ThresholdAlgorithm.MINIMUM,
-  })
-    .invert()
-    .clearBorder({})
-    .invert();
+  });
+  mask.invert({ out: mask });
+  mask.clearBorder({ out: mask });
+  mask.invert({ out: mask });
 
   const roiMapManager = fromMask(mask);
 
@@ -86,6 +87,7 @@ export default function ExploreROIs(props: { image: Image }) {
           },
         }}
       />
+      <MaskViewer mask={mask} />
     </div>
   );
 }
@@ -229,8 +231,8 @@ function getGroup(groups: any[], datum: any) {
 
 function getDistance(datum1: any, datum2: any) {
   let minDistance = Number.MAX_SAFE_INTEGER;
-  for (const point1 of datum1.mbr.corners) {
-    for (const point2 of datum2.mbr.corners) {
+  for (const point1 of datum1.mbr.points) {
+    for (const point2 of datum2.mbr.points) {
       const row1 = point1.row + datum1.origin.row;
       const column1 = point1.column + datum1.origin.column;
       const row2 = point2.row + datum2.origin.row;

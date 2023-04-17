@@ -18,5 +18,16 @@ export function getDataActions(globalState, setGlobalState) {
         }),
       );
     },
+
+    loadURL: async (dataURL) => {
+      const response = await fetch(dataURL);
+      const arrayBuffer = await response.arrayBuffer();
+      const image = decode(new Uint8Array(arrayBuffer));
+      setGlobalState(
+        produce((draft: any) => {
+          draft.data.image = image;
+        }),
+      );
+    },
   };
 }
