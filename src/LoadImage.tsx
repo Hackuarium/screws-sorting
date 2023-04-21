@@ -1,7 +1,7 @@
 import { useContext, useState } from 'react';
 
 import { DataContext, DataContextType } from './DataContext';
-import { Button, Input, Select } from './components/tailwind-ui';
+import { Button, Input, Select, Dropzone } from './components/tailwind-ui';
 
 export default function LoadImage() {
   const dataContext: DataContextType = useContext(DataContext);
@@ -73,6 +73,14 @@ export default function LoadImage() {
       >
         Load image
       </Button>
+      <Dropzone
+        maxFiles={1}
+        onDrop={async (files) => {
+          const file = files[0];
+          const arrayBuffer = await file.arrayBuffer();
+          dataContext.actions.loadArrayBuffer(arrayBuffer);
+        }}
+      />
     </div>
   );
 }
